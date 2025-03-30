@@ -3,6 +3,7 @@ package initializers
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -13,11 +14,11 @@ var DB *gorm.DB
 
 func ConnectToDB() {
 	// PostgreSQL connection string
-	dsn := "host=localhost user=postgres password=root123 dbname=File_Mng port=5432 sslmode=disable"
+	DSN := os.Getenv("DSN")
 	var err error
 
 	// ✅ Open DB using GORM
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(DSN), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
