@@ -1,6 +1,7 @@
 package main
 
 import (
+	"22BSA10076_Backend/controllers"
 	"22BSA10076_Backend/initializers"
 	"fmt"
 
@@ -11,6 +12,7 @@ func init() {
 	initializers.LoadEnvVariables()
 	initializers.ConnectToDB()  // ✅ Connect to DB using GORM
 	initializers.SyncDatabase() // ✅ AutoMigrate models
+
 }
 
 func main() {
@@ -24,5 +26,7 @@ func main() {
 		})
 	})
 
+	r.POST("/signup", controllers.Signup)
+	r.POST("/login", controllers.Login)
 	r.Run()
 }
